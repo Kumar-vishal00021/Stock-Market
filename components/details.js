@@ -1,4 +1,4 @@
-import { detailsAPI } from "./constant.js";
+import { detailsAPI } from "../const.js";
 
 let detailsData = {};
 const detailsEl = document.getElementById("detailsWrapper");

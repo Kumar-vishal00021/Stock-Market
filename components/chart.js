@@ -1,11 +1,10 @@
-import { chartAPI } from "./constant.js";
+import { chartAPI } from "../const.js";
 
 const ctx = document.getElementById("stockChart");
 
 const defaultDataFilter = "1mo";
 let stocksData = {};
 
-// Fetches and processes chart data
 function getChartData() {
   fetch(chartAPI)
     .then((res) => res.json())
@@ -14,26 +13,16 @@ function getChartData() {
       const [data] = res.stocksData;
       stocksData = data;
       renderChartOnDataChange();
-    })
-    .catch((error) => {
-      console.error("Error fetching chart data:", error);
     });
 }
 
-// Renders the chart based on selected data filter
 export function renderChartOnDataChange(id = defaultDataFilter) {
-  if (!window.selectedStock || !stocksData[window.selectedStock] || !stocksData[window.selectedStock][id]) {
-    console.error("Selected stock data not available");
-    return;
-  }
-
   const xAxisValues = stocksData[window.selectedStock][id].timeStamp;
   const yAxisValues = stocksData[window.selectedStock][id].value;
 
   renderChart(xAxisValues, yAxisValues);
 }
 
-// Listens for custom events to apply chart filters
 document.addEventListener("stockmarket-applyChartFilter", function (event) {
   const id = event.detail;
   renderChartOnDataChange(id);
@@ -50,7 +39,6 @@ const plugin = {
     ctx.restore();
   },
 };
-
 let stockChart;
 function renderChart(xAxisValues, yAxisValues) {
   if (stockChart) {
@@ -64,6 +52,7 @@ function renderChart(xAxisValues, yAxisValues) {
         {
           data: yAxisValues,
           borderWidth: 1,
+
           borderColor: "#39FF15",
         },
       ],
@@ -81,6 +70,11 @@ function renderChart(xAxisValues, yAxisValues) {
         x: {
           display: false,
           type: "time", // Ensure the type is 'time' for timeseries data
+          // time: {
+          //   unit: "day",
+          //   parser: "yyyy-mm-dd", // Moment.js format for parsing dates
+          //   tooltipFormat: "yyyy-mm-dd",
+          // },
         },
         y: {
           beginAtZero: false,
@@ -92,7 +86,6 @@ function renderChart(xAxisValues, yAxisValues) {
   });
 }
 
-// Initializes the chart data fetch
 export function init() {
   getChartData();
 }

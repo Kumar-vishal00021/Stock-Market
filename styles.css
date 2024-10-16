@@ -16,7 +16,7 @@ body {
   #contentWrapper {
     display: flex;
     align-items: flex-start;
-    justify-content: space-around;
+    justify-content: space-between;
     column-gap: 20px;
   }
   
@@ -56,10 +56,6 @@ body {
     height: 500px;
     width: max-content;
     position: relative;
-  }
-  
-  #stockChart {
-    width: 800px; /* Adjust the width as needed */
   }
   
   .chart-filters {

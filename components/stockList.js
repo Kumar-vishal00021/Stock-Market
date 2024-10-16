@@ -1,4 +1,4 @@
-import { stockListAPI } from "./constant.js";
+import { stockListAPI } from "../const.js";
 import { renderChartOnDataChange } from "./chart.js";
 import { renderSummary } from "./details.js";
 import { renderSelectedStock } from "./selectedStock.js";
