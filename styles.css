@@ -19,7 +19,12 @@ body {
     justify-content: space-between;
     column-gap: 20px;
   }
-  
+  #stockChart{
+    box-sizing: border-box;
+    display: block;
+    height: 430px ;
+    width: 690px ;
+  }
   .stock-stat {
     display: flex;
     column-gap: 15px;
